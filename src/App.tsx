@@ -3,16 +3,40 @@ import logo from "./logo.svg";
 import "./App.css";
 
 function App() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<any>(null);
 
   useEffect(() => {
+    fetchData();
     // This is where we fetch the data from newsapi.org
     // one we have it, via the fetch method.
     // we put the data into data using setData(newsarticles)
   }, []);
+  const fetchData = async () => {
+    const response = await fetch(
+      `https://newsapi.org/v2/everything?q=bitcoin&apiKey=${process.env.REACT_APP_API_KEY}`
+    );
+    const data = await response.json();
+    console.log("data" + JSON.stringify(data));
+    setData(data.articles);
+  };
   return (
     <div className="App">
-      <header className="App-header">{data}</header>
+      {data ? (
+        data.map((article: any) => (
+          <div style={{ marginTop: "30px", fontSize: "16px" }}>
+            {article.title}
+            {article.urlToImage && (
+              <img
+                src={article.urlToImage}
+                alt="no image"
+                className="article-img"
+              />
+            )}
+          </div>
+        ))
+      ) : (
+        <div> no data </div>
+      )}
     </div>
   );
 }
