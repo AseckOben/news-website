@@ -7,9 +7,6 @@ function App() {
 
   useEffect(() => {
     fetchData();
-    // This is where we fetch the data from newsapi.org
-    // one we have it, via the fetch method.
-    // we put the data into data using setData(newsarticles)
   }, []);
   const fetchData = async () => {
     const response = await fetch(
