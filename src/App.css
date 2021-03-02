@@ -2,8 +2,33 @@
   text-align: center;
 }
 
+input {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+button {
+  margin: 10px;
+  padding: 5px 20px;
+  border-radius: 15px;
+  outline: none;
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+button:hover {
+  background-color: rgb(99, 25, 42);
+  color: white;
+}
+button:active {
+  transform: scale(0.92);
+}
+
 .article-img {
   object-fit: contain;
   width: 100%;
   height: 500px;
+  margin-top: 5px;
 }

@@ -4,13 +4,14 @@ import "./App.css";
 
 function App() {
   const [data, setData] = useState<any>(null);
+  const [search, setSearch] = useState<string>("bitcoin");
 
   useEffect(() => {
     fetchData();
   }, []);
   const fetchData = async () => {
     const response = await fetch(
-      `https://newsapi.org/v2/everything?q=bitcoin&apiKey=${process.env.REACT_APP_API_KEY}`
+      `https://newsapi.org/v2/everything?q=${search}&apiKey=${process.env.REACT_APP_API_KEY}`
     );
     const data = await response.json();
     console.log("data" + JSON.stringify(data));
@@ -18,10 +19,16 @@ function App() {
   };
   return (
     <div className="App">
+      <input
+        type="text"
+        onChange={(e) => setSearch(e.target.value)}
+        value={search || ""}
+      />
+      <button onClick={() => fetchData()}>Search</button>
       {data ? (
         data.map((article: any) => (
-          <div style={{ marginTop: "30px", fontSize: "16px" }}>
-            {article.title}
+          <div style={{ marginTop: "30px" }}>
+            <h3>{article.title}</h3>
             {article.urlToImage && (
               <img
                 src={article.urlToImage}
